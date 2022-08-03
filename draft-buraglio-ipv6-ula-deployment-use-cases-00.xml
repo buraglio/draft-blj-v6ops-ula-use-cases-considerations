@@ -48,29 +48,19 @@
 <middle>
 
     <section title="Introduction" toc="default">
-        <t>As detailed in <xref target="draft-ietf-v6ops-ula"/>, in modern IPv4 / IPv6 dual-stacked environments, ULA addressing and GUA IPv6 addressing exhibit opposing behavior by default, which may result in important considerations for the use of ULA over GUA address space.
-        Because of the perceived similarities between Unique Local Addressing and <xref target=RFC1918/>, there may be a desire to deploy ULA as an analog to private, internal legacy IPv4 addressing within environments 
-        attempting to model an IPv4/IPv6 dual-stacked environment.</t>
+        <t>Because of the perceived similarities between Unique Local Addressing and <xref target=RFC1918/>, providers may be a desire to deploy ULA as an analog to private (non-routingable) IPv4 addressing within environments attempting to model an IPv4/IPv6 dual-stacked environment. As detailed in <xref target="draft-ietf-v6ops-ula"/>, however, the process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
+        <t>This document outlines use cases where IPv6 ULA address space may be used with IPv4 addressing, describing the results of each of these use cases in address slection.</t>
     </section>    <!-- end of introduction -->
-
-
+    
     <section title="Defining Operational Deployment Models With ULA" toc="default">
 
-        <t>Per <xref target="RFC6724"/>, the definition is incomplete for ULA precedence if a host is operating in a dual-stack environment. 
-    As written, <xref target="RFC6724"/> section 10.3 states: 
+        <t>Per <xref target="RFC6724"/>, the definition is incomplete for ULA precedence if a host is operating in a dual-stack environment. As written, <xref target="RFC6724"/> section 10.3 states:</t>
+        
+        <blockquote>The default policy table gives IPv6 addresses higher precedence than IPv4 addresses.  This means that applications will use IPv6 in preference to IPv4 when the two are equally suitable.  An administrator can change the policy table to prefer IPv4 addresses by giving the ::ffff:0.0.0.0/96 prefix a higher precedence.</blockquote>
  
-   "The default policy table gives IPv6 addresses higher precedence than
-   IPv4 addresses.  This means that applications will use IPv6 in
-   preference to IPv4 when the two are equally suitable.  An
-   administrator can change the policy table to prefer IPv4 addresses by
-   giving the ::ffff:0.0.0.0/96 prefix a higher precedence".
- 
-
-
- Expected behavior would be that ULA address space would be preferred over legacy IPv4, however this is not the case. This presents an acute issue with any environment that will use ULA addressing along side legacy IPv4 that is counter to the standard expectations for legacy IPv4 / IPv6 dual-stack behavior of preferring IPv6, as is performed with GUA addressing. 
- Further, <xref target="RFC6724"/> Section 10.6 states that this is resolvable by adding a site-specific policy to cause ULAs
-   within a site to be preferred over global addresses. While theoretically possible, this presents significant issues on devices with inaccessable configuration files as detailed below. </t>
-
+        <t>Based on this text, operators expect ULA address space be preferred over legacy IPv4; however this is not the case. This presents an acute issue with any environment that will use ULA addressing along side legacy IPv4 that is counter to the standard expectations for legacy IPv4 / IPv6 dual-stack behavior of preferring IPv6, as is performed with GUA addressing.</t>
+        
+        <t>Further, <xref target="RFC6724"/> Section 10.6 states that this is resolvable by adding a site-specific policy to cause ULAs within a site to be preferred over global addresses. While theoretically possible, this presents significant issues on devices with inaccessable configuration files as detailed below.</t>
 
     </section>    <!-- end of Defining Well Known Unintended Operational Issues With ULA -->
 

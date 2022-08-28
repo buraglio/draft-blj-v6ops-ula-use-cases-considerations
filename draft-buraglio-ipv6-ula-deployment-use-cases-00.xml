@@ -31,10 +31,15 @@
         <author initials='N.' surname='Buraglio' fullname='Nick Buraglio'>
             <organization>Energy Sciences Network</organization>
             <address>
-                <email>buraglio@es.net</email>
+                <email>nick@buraglio.com</email>
             </address>
         </author>
-
+       <author initials='R.' surname='White' fullname='Russ White'>
+            <organization>Juniper Networks</organization>
+            <address>
+                <email>russ@riw.us</email>
+            </address>
+        </author>
 
         <date/>
 
@@ -48,7 +53,7 @@
 <middle>
 
     <section title="Introduction" toc="default">
-        <t>Because of the perceived similarities between Unique Local Addressing and <xref target=RFC1918/>, providers may be a desire to deploy ULA as an analog to private (non-routingable) IPv4 addressing within environments attempting to model an IPv4/IPv6 dual-stacked environment. As detailed in <xref target="draft-ietf-v6ops-ula"/>, however, the process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
+        <t>Because of the perceived similarities between Unique Local Addressing and <xref target=RFC1918/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within environments attempting to model an IPv4/IPv6 dual-stacked environment. As detailed in <xref target="draft-ietf-v6ops-ula"/>, however, the process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
         <t>This document outlines use cases where IPv6 ULA address space may be used with IPv4 addressing, describing the results of each of these use cases in address slection.</t>
     </section>    <!-- end of introduction -->
     
@@ -56,27 +61,35 @@
 
         <t>Per <xref target="RFC6724"/>, the definition is incomplete for ULA precedence if a host is operating in a dual-stack environment. As written, <xref target="RFC6724"/> section 10.3 states:</t>
         
-        <blockquote>The default policy table gives IPv6 addresses higher precedence than IPv4 addresses.  This means that applications will use IPv6 in preference to IPv4 when the two are equally suitable.  An administrator can change the policy table to prefer IPv4 addresses by giving the ::ffff:0.0.0.0/96 prefix a higher precedence.</blockquote>
+        <blockquote>The default policy table gives IPv6 addresses higher precedence than IPv4 addresses.  The practical result of this is that applications reliant on the default operating system address selection mechanism will use IPv6 in preference to IPv4 when the two are equally suitable.  An administrator may change the policy table to prefer IPv4 addresses by giving the ::ffff:0.0.0.0/96 prefix a higher precedence.</blockquote>
  
-        <t>Based on this text, operators expect ULA address space be preferred over legacy IPv4; however this is not the case. This presents an acute issue with any environment that will use ULA addressing along side legacy IPv4 that is counter to the standard expectations for legacy IPv4 / IPv6 dual-stack behavior of preferring IPv6, as is performed with GUA addressing.</t>
+        <t>Based on this text, operators often expect ULA address space be preferred over legacy IPv4; however this is not the case. This presents an acute issue with any environment that will use ULA addressing along side any legacy IPv4 addressing, and is counter to the standard expectations for legacy IPv4 / IPv6 dual-stack behavior of preferring IPv6, as is performed with GUA addressing.</t>
         
-        <t>Further, <xref target="RFC6724"/> Section 10.6 states that this is resolvable by adding a site-specific policy to cause ULAs within a site to be preferred over global addresses. While theoretically possible, this presents significant issues on devices with inaccessable configuration files as detailed below.</t>
+        <t>Further, <xref target="RFC6724"/> Section 10.6 states that this is resolvable by adding a site-specific policy to cause ULAs within a site to be preferred over global addresses. While theoretically possible, this presents significant issues on devices with inaccessable configuration files, or large-scale deployments as detailed below.</t>
+
+        <t>Based on the known considerations in address selection, it is only advisable to deploy ULA addressing in select scenarios. Each of these scenarios has specific use cases and should not be considered a prototypical IPv6 deployment, having special use cases that are defined by distinct needs and requirements for their respective environments. </t>
+        
+        <t> Single stacked, IPv6-only networks. Most of the deployment models center around the absense of legacy addressing due to the described difficulty in adjusting the address selection criteria at scale and across platforms. However, ULA addressing is perfectly suited for single stacked networks requiring, or precluding external connectivity such as: </t>
+        <t> Management networks. -- Add details</t>
+        <t> Air-gapped or externally isolated networks. -- Add details </t>
+
 
     </section>    <!-- end of Defining Well Known Unintended Operational Issues With ULA -->
 
     <section title="Operational Considerations" toc="default">
 
-        <t>There are demonstrated and easily repeatible uses cases of ULA not being preferred in some OS and network equipment over legacy IPv4 that necessitate the immediate update to <xref target="RFC6724"/>
+        <t>There are demonstrated and easily repeatible uses cases of ULA not being preferred in many commercially available and open source operating systems and network equipment over legacy IPv4 that necessitate the immediate update to <xref target="RFC6724"/>
 to better reflect the original intent of the RFC. As with most adjustments to standards, and using <xref target="RFC6724"/>
-itself as a measurment, this update will likely take between 8-20 years to become common enough for relatively consistent behavior within operating systems. As a reference, as of the time of this writing, it has been 10 years since <xref target="RFC6724"/>
+itself as a measurment, this update will likely take between 8-20 years to become pervasive enough for consistent behavior within operating systems. As a reference, as of the time of this writing, it has been 10 years since <xref target="RFC6724"/>
 has been published but we continue to see existing commercial and open source operating systems exhibiting <xref target="RFC3484"/>
-behavior. While it should be noted that <xref target="RFC6724"/> defines a solution that is functional academically, operationally the solution of adjusting the address preference selection table 
+behavior. While it should be noted that <xref target="RFC6724"/> defines a solution that is academically functional, operationally the solution of adjusting the address preference selection table 
 is both operating system dependent and unable to be signalled by any network mechanism such as within a router advertisement, DHCPv6 option, or the like. This lack of an
 intra-protocol or network-based ability to adjust address selection preference, along with the inability to adjust a notable number of operating systems either programmatically or manually 
-renders operational scalability of such a mechanism functionally untenable.  
-It is anticipated that any update of <xref target="RFC6724"/>would require an additional 8-20 years to be fully realized and properly implemented in a majority of network connected systems. In addition, in the current versions of Linux, 
+renders operational scalability of such a mechanism functionally untenable. </t>
+
+<t>Based on the history of address selection standards, it is anticipated that any update of <xref target="RFC6724"/>would require an additional 8-20 years to be fully realized and properly implemented in a majority of network connected systems. In addition, in the current versions of Linux, 
 the priority table (gai.conf) still makes reference to <xref target="RFC3484"/>, further demonstrating the long timeframe to have updates reflected in a current, modern operating system. Examples of such out-of-date behavior can be found in 
-printers, cameras, fixed devices, IoT sensors, and longer lifecycle equipment. 
+printers, cameras, fixed devices, IoT sensors, and longer lifecycle equipment such as operational technology devices. 
 It is especially important to note this behavior in the long lifecycle equipment that exists in industrial control and operational techology environments due to their very long mean time to replacement. 
 The core issue is the stated interpretation from gai.conf that has the following default:
 </t>

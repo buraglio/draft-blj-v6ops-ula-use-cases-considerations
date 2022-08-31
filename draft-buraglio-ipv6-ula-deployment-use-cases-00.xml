@@ -76,7 +76,7 @@
         </t>
         <t> Air-gapped or externally isolated networks.
         Air-Gapped networks are similar in nature to management networks but exist in a totally air-gapped system with no non-physical access mechanism. Examples of these networks are speciality networks existing in locations such as highly secure enclaves, control systems, or networks such that may exist on submarines, aircraft, or other vessels or facilities requiring highly comparmentalized, access
-        controlled networked systems. 
+        controlled networked systems. Sensor networks may also fall into this category, with an example being power or water meters. 
         </t>
         <t>Dual-stacked networks with highly automated hosts.
         These networks may also provide legacy IPv4, but are specifically built with homogonous systems that enable highly automated workflows and management of all endpoints. In this use case, it is required that the address selection mechanism be available and easily changed en-masse to allow for ULA to be preferred and used over legacy IPv4. Another version of this type of deployment 

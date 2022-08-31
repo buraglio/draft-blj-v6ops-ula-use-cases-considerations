@@ -70,8 +70,17 @@
         <t>Based on the known considerations in address selection, it is only advisable to deploy ULA addressing in select scenarios. Each of these scenarios has specific use cases and should not be considered a prototypical IPv6 deployment, having special use cases that are defined by distinct needs and requirements for their respective environments. </t>
         
         <t> Single stacked, IPv6-only networks. Most of the deployment models center around the absense of legacy addressing due to the described difficulty in adjusting the address selection criteria at scale and across platforms. However, ULA addressing is perfectly suited for single stacked networks requiring, or precluding external connectivity such as: </t>
-        <t> Management networks. -- Add details</t>
-        <t> Air-gapped or externally isolated networks. -- Add details </t>
+        <t> Management networks
+        Networks designed and depoloyed as single-stacked IPv6 networks with the putpose of providing tightly controlled access for management of a given system. Access may come in the form of bastion hosts, dual or single (GUA) stacked VPN concentrators, or multi-homed routers providing no external access for the management network in question. These networks may be isolated by their respective access 
+        devices, or may have limited or tightly controlled access for the ULA single-stacked hosts or devices via application layer gateways. In all cases the ULA addressed devices are not available outside of their well known management plane and access mechanisms. 
+        </t>
+        <t> Air-gapped or externally isolated networks.
+        Air-Gapped networks are similar in nature to management networks but exist in a totally air-gapped system with no non-physical access mechanism. Examples of these networks are speciality networks existing in locations such as highly secure enclaves, control systems, or networks such that may exist on submarines, aircraft, or other vessels or facilities requiring highly comparmentalized, access
+        controlled networked systems. 
+        </t>
+        <t>Dual-stacked networks with highly automated hosts.
+        These networks may also provide legacy IPv4, but are specifically built with homogonous systems that enable highly automated workflows and management of all endpoints. In this use case, it is required that the address selection mechanism be available and easily changed en-masse to allow for ULA to be preferred and used over legacy IPv4. Another version of this type of deployment 
+        is one in which DNS is utilized and only contains AAAA records, or one in which there is no expectation of IPv6 utilization. 
 
 
     </section>    <!-- end of Defining Well Known Unintended Operational Issues With ULA -->
@@ -111,8 +120,8 @@ The core issue is the stated interpretation from gai.conf that has the following
 </figure>
 
 
-<t> Notice that they are interpreting the legacy IPv4 address range as "scopev4" and the prefix ::ffff:0.0.0.0/96 which has a higher precedence (35) in <xref target="RFC6724"/>
- then the ULA prefix of fc00::/7 (3). This results in legacy IPv4 being preferred over IPv6 ULA.</t>
+<t> Notice that the current interpretationm of the the legacy IPv4 address range as "scopev4" and the prefix ::ffff:0.0.0.0/96 has a higher precedence (35) in <xref target="RFC6724"/>
+ than the ULA prefix of fc00::/7 (3). This results in legacy IPv4 being preferred over IPv6 ULA.</t>
 
 <t>The operational outcome is the move to dual-stack with ULA is inconsistent and imparts unnecessary difficulty for both troubleshooting and creating the baseline expected behavior which are both requirements for deployments. This results in operational and engineering teams not gaining IPv6 experience as limited traffic is actually using IPv6, and security baseline expectations are inconsistent at best and haphazard at worst.</t>
 

@@ -56,7 +56,7 @@
         <t>Because of the perceived similarities between Unique Local Addressing and <xref target="RFC1918"/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within networking domains attempting to model an IPv4/IPv6 dual-stacked environment with private addressing. As detailed in <xref target="draft-ietf-v6ops-ula"/>, however, by default he process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
         <t>This document outlines use cases where IPv6 ULA address space may be used with IPv4 addressing, describing the results of each of these use cases in address slection.</t>
     </section>    <!-- end of introduction -->
-    
+    <section> 
     <section title="Defining Operational Deployment Models With ULA" toc="default">
 
         <t>Per <xref target="RFC6724"/>, the definition is incomplete for ULA precedence if a host is operating in a dual-stack environment. As written, <xref target="RFC6724"/> section 10.3 states:</t>
@@ -82,6 +82,7 @@
         These networks may also be configured with legacy IPv4, but are specifically built with homogonous systems that enable highly automated workflows and management of all endpoints. In this use case, it is required that the address selection mechanism be available and easily changed en-masse to allow for ULA to be preferred and used over legacy IPv4. Another version of this type of deployment 
         is one in which DNS is utilized and only contains AAAA records thus forcing a given host to resolve a ULA address and forego connectivity via legacy IPv4. 
         A similar deployment model using ULA addressing is one that simply has no expectation of IPv6 utilization without user or programmatic intervention. 
+        </t>
 
 
     </section>    <!-- end of Defining Well Known Unintended Operational Issues With ULA -->

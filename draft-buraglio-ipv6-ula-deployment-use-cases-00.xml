@@ -26,12 +26,12 @@
 
     <front>
 
-        <title>IPv6 Unique Local Addressing Deployment Use Cases</title>
+        <title>IPv6 Unique Local Addressing Deployment Details and Operational Use Cases</title>
 
         <author initials='N.' surname='Buraglio' fullname='Nick Buraglio'>
             <organization>Energy Sciences Network</organization>
             <address>
-                <email>nick@buraglio.com</email>
+                <email>buraglio@forwardingplane.net</email>
             </address>
         </author>
        <author initials='R.' surname='White' fullname='Russ White'>
@@ -53,7 +53,7 @@
 <middle>
 
     <section title="Introduction" toc="default">
-        <t>Because of the perceived similarities between Unique Local Addressing and <xref target=RFC1918/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within environments attempting to model an IPv4/IPv6 dual-stacked environment. As detailed in <xref target="draft-ietf-v6ops-ula"/>, however, the process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
+        <t>Because of the perceived similarities between Unique Local Addressing and <xref target=RFC1918/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within networking domains attempting to model an IPv4/IPv6 dual-stacked environment with private addressing. As detailed in <xref target="draft-ietf-v6ops-ula"/>, however, by default he process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
         <t>This document outlines use cases where IPv6 ULA address space may be used with IPv4 addressing, describing the results of each of these use cases in address slection.</t>
     </section>    <!-- end of introduction -->
     
@@ -61,9 +61,9 @@
 
         <t>Per <xref target="RFC6724"/>, the definition is incomplete for ULA precedence if a host is operating in a dual-stack environment. As written, <xref target="RFC6724"/> section 10.3 states:</t>
         
-        <blockquote>The default policy table gives IPv6 addresses higher precedence than IPv4 addresses.  The practical result of this is that applications reliant on the default operating system address selection mechanism will use IPv6 in preference to IPv4 when the two are equally suitable.  An administrator may change the policy table to prefer IPv4 addresses by giving the ::ffff:0.0.0.0/96 prefix a higher precedence.</blockquote>
+        <blockquote>The default policy table gives IPv6 addresses higher precedence than IPv4 addresses.  The practical result of this is that applications reliant on the default operating system address selection mechanism will use IPv6 in preference to IPv4 when the two are equally suitable. An administrator may change the policy table to prefer IPv4 addresses by giving the ::ffff:0.0.0.0/96 prefix a higher precedence.</blockquote>
  
-        <t>Based on this text, operators often expect ULA address space be preferred over legacy IPv4; however this is not the case. This presents an acute issue with any environment that will use ULA addressing along side any legacy IPv4 addressing, and is counter to the standard expectations for legacy IPv4 / IPv6 dual-stack behavior of preferring IPv6, as is performed with GUA addressing.</t>
+        <t>Based on this text, operators may expect ULA address space be preferred over legacy IPv4; however this is not the case. This presents an acute issue with any environment that will use ULA addressing along side any legacy IPv4 addressing and does not have the capability or knowledge of the requirement of adjusting the policy table, and is counter to the standard expectations for legacy IPv4 / IPv6 dual-stack behavior of preferring IPv6, as is performed in the prevailing deployment model of GUA addressing.</t>
         
         <t>Further, <xref target="RFC6724"/> Section 10.6 states that this is resolvable by adding a site-specific policy to cause ULAs within a site to be preferred over global addresses. While theoretically possible, this presents significant issues on devices with inaccessable configuration files, or large-scale deployments as detailed below.</t>
 
@@ -76,11 +76,12 @@
         </t>
         <t> Air-gapped or externally isolated networks.
         Air-Gapped networks are similar in nature to management networks but exist in a totally air-gapped system with no non-physical access mechanism. Examples of these networks are speciality networks existing in locations such as highly secure enclaves, control systems, or networks such that may exist on submarines, aircraft, or other vessels or facilities requiring highly comparmentalized, access
-        controlled networked systems. Sensor networks may also fall into this category, with an example being power or water meters. 
+        controlled networked systems. Sensor networks may also fall into this category, with an example being power, water or other utility or highly specialized metering devices. 
         </t>
         <t>Dual-stacked networks with highly automated hosts.
-        These networks may also provide legacy IPv4, but are specifically built with homogonous systems that enable highly automated workflows and management of all endpoints. In this use case, it is required that the address selection mechanism be available and easily changed en-masse to allow for ULA to be preferred and used over legacy IPv4. Another version of this type of deployment 
-        is one in which DNS is utilized and only contains AAAA records, or one in which there is no expectation of IPv6 utilization. 
+        These networks may also be configured with legacy IPv4, but are specifically built with homogonous systems that enable highly automated workflows and management of all endpoints. In this use case, it is required that the address selection mechanism be available and easily changed en-masse to allow for ULA to be preferred and used over legacy IPv4. Another version of this type of deployment 
+        is one in which DNS is utilized and only contains AAAA records thus forcing a given host to resolve a ULA address and forego connectivity via legacy IPv4. 
+        A similar deployment model using ULA addressing is one that simply has no expectation of IPv6 utilization without user or programmatic intervention. 
 
 
     </section>    <!-- end of Defining Well Known Unintended Operational Issues With ULA -->
@@ -92,7 +93,7 @@ to better reflect the original intent of the RFC. As with most adjustments to st
 itself as a measurment, this update will likely take between 8-20 years to become pervasive enough for consistent behavior within operating systems. As a reference, as of the time of this writing, it has been 10 years since <xref target="RFC6724"/>
 has been published but we continue to see existing commercial and open source operating systems exhibiting <xref target="RFC3484"/>
 behavior. While it should be noted that <xref target="RFC6724"/> defines a solution that is academically functional, operationally the solution of adjusting the address preference selection table 
-is both operating system dependent and unable to be signalled by any network mechanism such as within a router advertisement, DHCPv6 option, or the like. This lack of an
+is both operating system dependent and currently unable to be signalled by any network mechanism such as within a router advertisement, DHCPv6 option, or the like. This lack of an
 intra-protocol or network-based ability to adjust address selection preference, along with the inability to adjust a notable number of operating systems either programmatically or manually 
 renders operational scalability of such a mechanism functionally untenable. </t>
 
@@ -123,7 +124,7 @@ The core issue is the stated interpretation from gai.conf that has the following
 <t> Notice that the current interpretationm of the the legacy IPv4 address range as "scopev4" and the prefix ::ffff:0.0.0.0/96 has a higher precedence (35) in <xref target="RFC6724"/>
  than the ULA prefix of fc00::/7 (3). This results in legacy IPv4 being preferred over IPv6 ULA.</t>
 
-<t>The operational outcome is the move to dual-stack with ULA is inconsistent and imparts unnecessary difficulty for both troubleshooting and creating the baseline expected behavior which are both requirements for deployments. This results in operational and engineering teams not gaining IPv6 experience as limited traffic is actually using IPv6, and security baseline expectations are inconsistent at best and haphazard at worst.</t>
+<t>The operational outcome is the move to dual-stack with ULA is inconsistent and imparts unnecessary difficulty for both troubleshooting and creating the baseline expected behavior which are both requirements for long-term, supportable deployments. This results in operational and engineering teams not gaining IPv6 experience as limited traffic is actually using IPv6, and security baseline expectations are inconsistent at best and haphazard at worst.</t>
 
 <t>In practice, <xref target="RFC6724"/>
  imposes several operational shortcomings preventing both consistent and desired behavior. If we define "desired behavior" as IPv6 preference over legacy IPv4 for address and protocol selection, then the resulting implemented behavior, based on <xref target="RFC6724"/>
@@ -242,12 +243,12 @@ networking transition planning, large scale network modeling, network lab enviro
 
 <section title="Security Considerations" toc="default">
 
-<t>Such unexpected behavior can result in odd operational outcomes which can result in serious security and compliance issues and could, in some cases, result in disabling of IPv6 to acheive compliance and consistency. .</t>
+<t>Such unexpected behavior can result in unexpected operational outcomes which can result in serious security and compliance issues and could, in some cases, result in disabling of IPv6 to acheive compliance and consistency, as we have seen in the past. .</t>
 
 </section><!-- end of security considerations -->
 
 <section title="Acknowledgements" toc="default">
-<t>The authors acknowledge the work of Brian Carpenter, David Farmer, Bob Hinden, Mark Andrews, Vasilenko Eduardand, and Mark Smith for participation in the technical discussions
+<t>The authors acknowledge the work of Brian Carpenter, XiPeng Xiao, David Farmer, Bob Hinden, Mark Andrews, Vasilenko Eduardand, and Mark Smith for participation in the technical discussions
  leading to this finding and Michael Ackermann, Tom Coffeen, Kevin Myers, and Ed Horley for providing further testing and operational input.</t>
 </section><!-- end of acknowledgements -->
 

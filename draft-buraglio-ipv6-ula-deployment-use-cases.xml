@@ -42,8 +42,7 @@
         <date/>
 
         <abstract>
-            <t>Use of unique local addressing (ULA) as an addressing practice brings with it distinctive and specialized  use cases that may be counter to more widely deployed use cases using Global Unicast Addressing (GUA) in some operational scenarios. 
-            Deployment Details and Operational Use Cases for Unique Local Addressing</t>
+            <t>Use of unique local addressing (ULA) as an addressing practice brings with it distinctive and specialized  use cases that may be counter to more widely deployed use cases using Global Unicast Addressing (GUA) in some operational scenarios. </t>
     </abstract>
 
 </front>

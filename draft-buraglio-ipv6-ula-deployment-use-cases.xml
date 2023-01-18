@@ -5,8 +5,6 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY RFC2119 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC6724 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6724.xml">
-<!ENTITY RFC4193 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4193.xml">
-<!ENTITY RFC6598 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6598.xml">
 <!ENTITY RFC1918 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1918.xml">
 <!ENTITY RFC8305 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.8305.xml">
 <!ENTITY RFC3484 SYSTEM "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3484.xml">
@@ -53,7 +51,7 @@
 <middle>
 
     <section title="Introduction" toc="default">
-        <t>Because of the perceived similarities between Unique Local Addressing and <xref target="RFC1918"/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within networking domains attempting to model an IPv4/IPv6 dual-stacked environment with private addressing. As detailed in <xref target="draft-ietf-v6ops-ula"/>, however, by default he process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
+        <t>Because of the perceived similarities between Unique Local Addressing and <xref target="RFC1918"/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within networking domains attempting to model an IPv4/IPv6 dual-stacked environment with private addressing. As detailed in draft-ietf-v6ops-ula (link?), however, by default he process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
         <t>This document outlines use cases where IPv6 ULA address space may be used with IPv4 addressing, describing the results of each of these use cases in address slection.</t>
     </section>    <!-- end of introduction -->
     
@@ -264,8 +262,6 @@ networking transition planning, large scale network modeling, network lab enviro
 </references><!-- end of normative references -->
 <references title="Informative References">
 <!--?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?-->
-            &RFC4193;
-            &RFC6598;
             &RFC1918;
 </references><!-- end of informative references -->
 </back>

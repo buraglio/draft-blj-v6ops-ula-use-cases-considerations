@@ -18,7 +18,7 @@
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="info" docName="draft-buraglio-v6ops-ula-use-cases-00" ipr="trust200902">
+<rfc category="info" docName="draft-buraglio-v6ops-ula-use-cases-01" ipr="trust200902">
 
     <!-- ***** FRONT MATTER ***** -->
 
@@ -50,8 +50,8 @@
 <middle>
 
     <section title="Introduction" toc="default">
-        <t>Because of the perceived similarities between Unique Local Addressing and <xref target="RFC1918"/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within networking domains attempting to model an IPv4/IPv6 dual-stacked environment with private addressing. As detailed in draft-ietf-v6ops-ula, however, by default he process to choose between using IPv4 or IPv6 addresses is different when deploying ULA or GUA IPv6 address spaces.</t>
-        <t>This document outlines use cases where IPv6 ULA address space may be used with IPv4 addressing, describing the results of each of these use cases in address slection.</t>
+        <t>Because of the perceived similarities between Unique Local Addressing and <xref target="RFC1918"/>, there may emerge a desire to deploy ULA as an analog to private (non-glocally routable) IPv4 addressing within networking domains attempting to model an IPv4/IPv6 dual-stacked environment with private addressing. As detailed in draft-ietf-v6ops-ula, however, by default the process to choose between using IPv4 or IPv6 addresses is different when deploying ULA vs. GUA IPv6 address spaces.</t>
+        <t>This document outlines use cases in which IPv6 ULA address space may be used with IPv4 addressing or as a stand alone addressing schema, describing the results of each of these use cases in address slection.</t>
     </section>    <!-- end of introduction -->
     
     <section title="Defining Operational Deployment Models With ULA" toc="default">

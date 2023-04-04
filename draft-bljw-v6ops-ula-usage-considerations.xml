@@ -101,7 +101,7 @@
       <t>This document provides considerations for using IPv6 Unique Local
       Addresses (ULAs). Based on an analysis of different ULA usage scenarios,
       this document identifies use cases where ULA addresses are helpful as
-      well as potential problems caused by using them.</t>
+      well as the potential problems and consequences of using them.</t>
     </abstract>
   </front>
 
@@ -116,7 +116,7 @@
 
           <t>ULA prefixes can be automatically generated using the algorithms
           described in <xref target="RFC4193"/>. This feature allows automatic
-          prefix allocation. Thus one can get a network working immediately
+          prefix allocation. Thus, one can get a network working immediately
           without applying for prefix(es) from an RIR/LIR (Regional Internet
           Registry/Local Internet Registry).</t>
 
@@ -138,7 +138,7 @@
 
           <t hangText="">ULAs can be used for internal communications even
           without Internet connectivity. They need no registration, so they
-          can support on-demand usage and do not carry any RIR/LIR burden of
+          are able to support on-demand usage and do not carry any RIR/LIR burden of
           documentation or fees.</t>
 
           <t hangText="-">Well Known Prefix</t>
@@ -174,35 +174,34 @@
         <xref target="RFC1918"/> addresses and those policies may directly map
         to ULA <xref target="RFC4864"/>.</t>
 
-        <t>But this does not mean that ULA is equal to an IPv6 version of
-        <xref target="RFC1918"/> deployment. <xref target="RFC1918"/> usually
-        combines with NAT/NAPT for global connectivity. But it is not
-        necessary to combine ULAs with any kind of NAT. Operators can use ULA
+        <t>However, this does not mean that ULA is equal to an IPv6 version of
+        <xref target="RFC1918"/> deployment. Modern deployments of <xref target="RFC1918"/> 
+        is typically deployed with a NAT/NAPT to enable global connectivity. 
+        However, due to the flexibilitry native to IPv6 and its ability to operate with multiple addresses per interface, 
+        it is not necessary to combine ULAs with any kind of NAT. Because of this flexibility, operators are able use ULA
         for local communications along with global addresses for global
-        communications (see <xref target="ULAPA"/>). This is a big advantage
-        brought by default support of multiple-addresses-per-interface feature
-        in IPv6. (People may still have a requirement for NAT with ULA, this
-        is discussed in <xref target="ULAonly"/>. But people also need to keep
-        in mind that ULA is not intentionally designed for this kind of use
-        case.)</t>
+        communications (see <xref target="ULAPA"/>). This is a notable advantage
+        unavailable in legacy IP. (There may still exist may still have a requirement for NAT with ULA - this
+        is discussed in <xref target="ULAonly"/> - however it should be noted that 
+        ULA is not intentionally designed for this use case, and there are significant operational details and downsides 
+        that accompany that type of architecture.</t>
 
         <t>Another important difference is the ability to merge two ULA
-        networks without renumbering (because of the uniqueness), which is a
-        big advantage over <xref target="RFC1918"/>.</t>
+        networks without renumbering (because of the uniqueness), another significant advantage over <xref target="RFC1918"/>.</t>
       </section>
 
       <section title="Using ULAs in a Limited Scope">
         <t>A ULA is by definition a prefix that is never advertised outside a
         given domain, and is used within that domain by agreement of those
-        networked by the domain.</t>
+        networked by the administrative domain.</t>
 
-        <t>So when using ULAs in a network, the administrators need to clearly
+        <t>When using ULAs in a network, the administrators need to clearly
         set the scope of the ULAs and configure ACLs on relevant border
-        routers to block them out of the scope. And if internal DNS is
+        routers to appropriately filter them out of the scope. In the case that internal DNS is
         enabled, the administrators might also need to use internal-only DNS
-        names for ULAs and might need to split the DNS so that the internal
+        names for ULAs and it may be advisable to split the DNS so that the internal
         DNS server includes records that are not presented in the external DNS
-        server.</t>
+        server, creating a clear demarcation between internal and external name resolutiokn.</t>
       </section>
     </section>
 
